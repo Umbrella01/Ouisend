@@ -1,0 +1,35 @@
+/* You can add global styles to this file, and also import other style files */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .footer-link {
+        @apply inline-block hover:translate-x-2 transform transition;
+    }
+    .social-media {
+        @apply inline-block hover:text-yellow-500 transform transition hover:-translate-y-0.5;
+    }
+    .btn-filter {
+        @apply h-16 text-gray-600 flex-grow flex items-center justify-center flex-shrink-0 space-x-2 lg:space-x-3 px-2 py-2 lg:py-3 lg:text-lg font-medium rounded-t hover:bg-black hover:bg-opacity-5 focus:outline-none focus:bg-black focus:bg-opacity-5;
+    }
+    .btn-active {
+        @apply bg-black bg-opacity-10
+    }
+    .btn-label {
+        @apply bg-yellow-400 text-white text-xs py-1 px-2 rounded;
+    }
+    .btn-icon {
+        @apply relative sm:hidden;
+    }
+    .label-icon {
+        @apply absolute top-0 right-0 transform translate-x-4 rounded-full;
+    }
+    .sm-show {
+        @apply hidden sm:inline-block;
+    }
+    .sortActive {
+        @apply bg-gray-100;
+    }
+}

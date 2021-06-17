@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="88" height="25" viewBox="0 0 88 25">
+  <g id="logo_1" data-name="logo 1" transform="translate(-97 -174)">
+    <text id="Ouisend" transform="translate(124 193)" fill="#001500" font-size="17" font-family="Poppins-Medium, Poppins" font-weight="500" letter-spacing="-0.1em"><tspan x="0" y="0">Ouisend</tspan></text>
+    <g id="Groupe_2" data-name="Groupe 2">
+      <rect id="Rectangle_2" data-name="Rectangle 2" width="25" height="25" rx="3" transform="translate(97 174)" fill="#fbbf24"/>
+      <g id="Groupe_1" data-name="Groupe 1" transform="translate(101 179)">
+        <path id="dolly-solid" d="M8.334,7.866a4.127,4.127,0,0,1,1.4.7l4.575-1.524A.452.452,0,0,0,14.6,6.47L12.886,1.337a.452.452,0,0,0-.572-.286l-1.731.578L8.863,2.2l-1.745.581a.452.452,0,0,0-.286.572Zm7.96,1.38L16,8.385a.452.452,0,0,0-.572-.286L9.385,10.116A2.707,2.707,0,0,0,7.3,9.067L4.487.62A.908.908,0,0,0,3.626,0H.453A.455.455,0,0,0,0,.453V1.36a.455.455,0,0,0,.453.453H2.971L5.583,9.651a2.7,2.7,0,0,0-1.02,2.564,2.718,2.718,0,0,0,5.4-.38l6.042-2.017A.453.453,0,0,0,16.294,9.246Zm-9.042,3.9a1.36,1.36,0,1,1,1.36-1.36A1.36,1.36,0,0,1,7.252,13.144Z" transform="translate(0)"/>
+        <rect id="Rectangle_1" data-name="Rectangle 1" width="1.229" height="2.652" transform="translate(9.144 2.101) rotate(-18)" fill="#b88440"/>
+      </g>
+    </g>
+  </g>
+</svg>

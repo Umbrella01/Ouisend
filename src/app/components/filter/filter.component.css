@@ -1,0 +1,7 @@
+.sort > svg {
+    display: none;
+}
+
+.sort.sortActive > svg {
+    display: inline-block;
+}
