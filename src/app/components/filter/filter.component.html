@@ -1,0 +1,40 @@
+<div class="relative px-2 -mb-3" id="filtrer">
+    <button 
+        class="leading-none font-medium text-yellow-400 hover:text-yellow-300"
+        (click)="onActive()"
+    >Filter</button>
+
+    <div 
+        [ngClass]="{
+            'w-48 bg-white absolute top-1/2 right-0 transform -translate-y-1/2 rounded-sm text-gray-600 overflow-hidden shadow': true,
+            'hidden': !isActived
+            }"
+        (click)="onDisactive()"
+    >
+        <button
+            (click)="sortCarrier.emit(); onSetSortActive($event)" 
+            class="w-full flex items-start hover:bg-gray-100 p-2 focus:outline-none focus:bg-gray-100 sort"
+        >
+            <svg class="w-5 h-5 mr-2 flex-none stroke-current text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span class="w-full text-left">Transporteurs vérifiés</span>
+        </button>
+        <button 
+            (click)="sortRating.emit(); onSetSortActive($event)"
+            class="w-full flex items-start hover:bg-gray-100 p-2 focus:outline-none focus:bg-gray-100 sort">
+            <svg class="w-5 h-5 mr-2 flex-none stroke-current text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span class="w-full text-left">Transporteurs mieux notés</span>
+        </button>
+        <button 
+            (click)="sortLimit.emit(); onSetSortActive($event)"
+            class="w-full flex items-start hover:bg-gray-100 p-2 focus:outline-none focus:bg-gray-100 sort">
+            <svg class="w-5 h-5 mr-2 flex-none stroke-current text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span class="w-full text-left">Limite de poids >= 40kg</span>
+        </button>
+    </div>
+</div>

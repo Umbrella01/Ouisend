@@ -1,0 +1,210 @@
+<main>
+    <div class="min-h-screen bg-white flex flex-col">
+
+        <!-- Récapitulatif et filtre de la recherche -->
+        <div class="w-full flex-none bg-gray-50 sticky top-0 space-y-8 pt-8 px-2 z-10 border-b-2 border-gray-100" id="recap">
+    
+            <!-- Récapitulatif -->
+            <div class="flex justify-center">
+                <div class="flex-shrink-0 mr-2 grid place-items-center px-2 bg-white rounded">
+                    <svg class="w-6 h-6 lg:w-8 lg:h-8 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </div>
+                
+                <div class="hidden w-full max-w-screen-md sm:grid grid-cols-3 gap-2 rounded bg-transparent">
+                    <div class="relative bg-black bg-opacity-10 rounded p-2 select-none">
+                        <h5 class="block font-semibold text-black leading-none uppercase text-sm">Départ</h5>
+                        <p class="truncate leading-tight">Paris</p>
+                    </div>
+                    <div class="bg-black bg-opacity-10 rounded p-2 select-none">
+                        <h5 class="block font-semibold text-black leading-none">Destination</h5>
+                        <p class="truncate leading-tight">Abidjan</p>
+                    </div>
+                    <div class="bg-black bg-opacity-10 rounded p-2 select-none">
+                        <h5 class="block font-semibold text-black leading-none">Date</h5>
+                        <p class="truncate leading-tight">Ven. 2 avril</p>
+                    </div>
+                </div>
+
+                <div class="sm:hidden w-full max-w-screen-md bg-black bg-opacity-10 p-2 rounded">
+                    <p class="truncate leading-tight flex items-center">
+                        Paris
+                        <svg class="w-5 h-5 mx-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        Abidjan
+                    </p>
+                    <p class="truncate leading-tight">Ven. 2 avril</p>
+                </div>
+            </div>
+    
+            <!-- Filtre par catégorie -->
+            <div class="max-w-2xl mx-auto sm:px-2 flex items-center flex-nowrap overflow-x-auto">
+                <button 
+                    class="btn-filter btn-active"
+                    (click)="onSortByType($event, '')">
+                    <span class="btn-icon">
+                        <svg role="img" class="w-6 h-6 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"></path>
+                        </svg>
+                        <span 
+                            *ngIf="showShipments()" 
+                            class="btn-label label-icon -translate-y-1/2">{{ countByType() }}</span>
+                    </span>
+                    <span class="sm-show">Tout</span>
+                    <span 
+                        class="btn-label sm-show"
+                        *ngIf="showShipments()">{{ countByType() }}</span>
+                </button>
+    
+                <button 
+                    class="btn-filter" 
+                    (click)="onSortByType($event, 'avion')">
+                    <span class="btn-icon">
+                        <svg role="img" aria-label="plane" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 flex-shrink-0 transform rotate-12 translate-x-1" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M3.414,13.778L2,15.192l4.949,2.121l2.122,4.95l1.414-1.414l-0.707-3.536l3.313-3.313l3.61,7.704l1.339-1.339l-1.19-10.123 l2.828-2.829c0.781-0.781,0.781-2.047,0-2.828c-0.781-0.781-2.048-0.781-2.828,0l-2.903,2.903L3.824,6.297L2.559,7.563l7.644,3.67 l-3.253,3.253L3.414,13.778z"></path>
+                        </svg>
+                        <span 
+                            class="btn-label label-icon -translate-y-1/2 translate-x-5"
+                            *ngIf="showShipments('avion')"
+                        >{{ countByType('avion') }}</span>
+                    </span>
+                    <span class="sm-show">Avion</span>
+                    <span 
+                        class="btn-label sm-show"
+                        *ngIf="showShipments('avion')"
+                    >{{ countByType('avion') }}</span>
+                </button>
+    
+                <button 
+                    class="btn-filter" 
+                    (click)="onSortByType($event, 'bateau')">
+                    <span class="btn-icon">
+                        <svg data-prefix="fas" data-icon="ship" class="w-6 h-6 flex-shrink-0" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+                            <path fill="currentColor" d="M496.616 372.639l70.012-70.012c16.899-16.9 9.942-45.771-12.836-53.092L512 236.102V96c0-17.673-14.327-32-32-32h-64V24c0-13.255-10.745-24-24-24H248c-13.255 0-24 10.745-24 24v40h-64c-17.673 0-32 14.327-32 32v140.102l-41.792 13.433c-22.753 7.313-29.754 36.173-12.836 53.092l70.012 70.012C125.828 416.287 85.587 448 24 448c-13.255 0-24 10.745-24 24v16c0 13.255 10.745 24 24 24 61.023 0 107.499-20.61 143.258-59.396C181.677 487.432 216.021 512 256 512h128c39.979 0 74.323-24.568 88.742-59.396C508.495 491.384 554.968 512 616 512c13.255 0 24-10.745 24-24v-16c0-13.255-10.745-24-24-24-60.817 0-101.542-31.001-119.384-75.361zM192 128h256v87.531l-118.208-37.995a31.995 31.995 0 0 0-19.584 0L192 215.531V128z"></path>
+                        </svg>
+                        <span
+                            class="btn-label label-icon -translate-y-1/2"
+                            *ngIf="showShipments('bateau')"
+                        >{{ countByType('bateau') }}</span>
+                    </span>
+                    <span class="sm-show">Bateau</span>
+                    <span 
+                        class="btn-label sm-show"
+                        *ngIf="showShipments('bateau')"
+                    >{{ countByType('bateau') }}</span>
+                </button>
+    
+                <button 
+                    class="btn-filter" 
+                    (click)="onSortByType($event, 'train')">
+                    <span class="btn-icon">
+                        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" class="w-6 h-6 flex-shrink-0 fill-current" viewBox="0 0 582.675 582.675" xml:space="preserve">
+                            <g>
+                                <g id="Layer_1_21_">
+                                    <path d="M518.288,545.7l-85.425-155.55c24.225-3.825,42.074-25.5,42.074-49.726v-229.5C474.937,49.725,425.212,0,364.012,0
+                                        h-145.35c-61.2,0-112.2,49.725-112.2,112.2v228.225c0,25.5,17.85,45.9,42.075,49.726L64.387,545.7
+                                        c-6.375,12.75-2.55,28.05,10.2,34.425c3.825,2.55,7.65,2.55,11.475,2.55c8.925,0,17.85-5.1,21.675-12.75l7.65-12.75h351.9
+                                        l7.649,12.75c5.101,8.925,12.75,12.75,21.676,12.75c3.824,0,7.649-1.274,11.475-2.55C520.837,573.75,524.663,558.45,518.288,545.7
+                                        z M398.437,430.95h-214.2l21.675-39.525h170.85L398.437,430.95z M394.613,345.525c-20.4,0-36.976-16.575-36.976-36.976
+                                        c0-20.4,16.575-36.975,36.976-36.975c20.399,0,36.975,16.575,36.975,36.975C431.587,327.675,415.012,345.525,394.613,345.525z
+                                        M151.087,126.225c0-39.525,31.875-71.4,70.125-71.4h138.975c38.25,0,71.4,31.875,71.4,71.4v61.2
+                                        c0,14.025-11.475,24.225-25.5,24.225h-229.5c-14.025,0-24.225-11.475-24.225-24.225L151.087,126.225L151.087,126.225z
+                                        M188.062,270.3c20.4,0,36.975,16.575,36.975,36.976c0,20.399-16.575,36.975-36.975,36.975s-36.975-16.575-36.975-36.975
+                                        C151.087,286.875,167.663,270.3,188.062,270.3z M135.788,518.925l28.05-49.725h255l28.05,49.725H135.788z"/>
+                                </g>
+                            </g>
+                        </svg>
+                        <span
+                            class="btn-label label-icon -translate-y-1/2"
+                            *ngIf="showShipments('train')"
+                        >{{ countByType('train') }}</span>
+                    </span>
+                    <span class="sm-show">Train</span>
+                    <span 
+                        class="btn-label sm-show"
+                        *ngIf="showShipments('train')"
+                    >{{ countByType('train') }}</span>
+                </button>
+    
+                <button 
+                    class="btn-filter" 
+                    (click)="onSortByType($event, 'voiture')">
+                    <span class="btn-icon">
+                        <svg data-prefix="fas" data-icon="car" class="w-6 h-6 flex-shrink-0" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path fill="currentColor" d="M499.99 176h-59.87l-16.64-41.6C406.38 91.63 365.57 64 319.5 64h-127c-46.06 0-86.88 27.63-103.99 70.4L71.87 176H12.01C4.2 176-1.53 183.34.37 190.91l6 24C7.7 220.25 12.5 224 18.01 224h20.07C24.65 235.73 16 252.78 16 272v48c0 16.12 6.16 30.67 16 41.93V416c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32v-32h256v32c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32v-54.07c9.84-11.25 16-25.8 16-41.93v-48c0-19.22-8.65-36.27-22.07-48H494c5.51 0 10.31-3.75 11.64-9.09l6-24c1.89-7.57-3.84-14.91-11.65-14.91zm-352.06-17.83c7.29-18.22 24.94-30.17 44.57-30.17h127c19.63 0 37.28 11.95 44.57 30.17L384 208H128l19.93-49.83zM96 319.8c-19.2 0-32-12.76-32-31.9S76.8 256 96 256s48 28.71 48 47.85-28.8 15.95-48 15.95zm320 0c-19.2 0-48 3.19-48-15.95S396.8 256 416 256s32 12.76 32 31.9-12.8 31.9-32 31.9z"></path>
+                        </svg>
+                        <span
+                            class="btn-label label-icon -translate-y-1/2"
+                            *ngIf="showShipments('voiture')"
+                        >{{ countByType('voiture') }}</span>
+                    </span>
+                    <span class="sm-show">Voiture</span>
+                    <span 
+                        class="btn-label sm-show"
+                        *ngIf="showShipments('voiture')"
+                    >{{ countByType('voiture') }}</span>
+                </button>
+    
+                <button 
+                    class="btn-filter" 
+                    (click)="onSortByType($event, 'bus')">
+                    <span class="btn-icon">
+                        <svg data-prefix="fas" data-icon="bus" class="w-5 h-5 flex-shrink-0" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path fill="currentColor" d="M488 128h-8V80c0-44.8-99.2-80-224-80S32 35.2 32 80v48h-8c-13.25 0-24 10.74-24 24v80c0 13.25 10.75 24 24 24h8v160c0 17.67 14.33 32 32 32v32c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32v-32h192v32c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32v-32h6.4c16 0 25.6-12.8 25.6-25.6V256h8c13.25 0 24-10.75 24-24v-80c0-13.26-10.75-24-24-24zM112 400c-17.67 0-32-14.33-32-32s14.33-32 32-32 32 14.33 32 32-14.33 32-32 32zm16-112c-17.67 0-32-14.33-32-32V128c0-17.67 14.33-32 32-32h256c17.67 0 32 14.33 32 32v128c0 17.67-14.33 32-32 32H128zm272 112c-17.67 0-32-14.33-32-32s14.33-32 32-32 32 14.33 32 32-14.33 32-32 32z"></path>
+                        </svg>
+                        <span
+                            class="btn-label label-icon -translate-y-1/2"
+                            *ngIf="showShipments('bus')"
+                        >{{ countByType('bus') }}</span>
+                    </span>
+                    <span class="sm-show">Bus</span>
+                    <span 
+                        class="btn-label sm-show"
+                        *ngIf="showShipments('bus')"
+                    >{{ countByType('bus') }}</span>
+                </button>
+            </div>
+
+            <span *ngIf="underlineLink" id="underlineLink" class="block absolute left-0 bottom-0 w-0 h-0.5 rounded bg-yellow-400 transition"></span>
+        </div>
+    
+        <!-- Résultats de la recherche -->
+        <article class="flex-grow px-3 py-8 space-y-2 bg-white">
+            <div class="max-w-screen-sm mx-auto">
+                <h4 class="font-semibold text-xl text-gray-700 mb-4">Vendredi 2 avril</h4>
+    
+                <div class="flex items-center justify-between space-x-2">
+                    <div>
+                        <p class="flex items-center space-x-2 text-gray-600 font-medium leading-tight">
+                            <span>Paris</span><svg class="w-5 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg><span>Abidjan</span>
+                        </p>
+                        <p class="text-gray-600 font-medium leading-tight">{{ shipmentsCount }} expéditions disponibles</p>
+                    </div>
+    
+                    <!-- Filtre -->
+                    <app-filter
+                        (sortCarrier)="onSortVerifyCarrier()"
+                        (sortRating)="onSortByBestCarriers()"
+                        (sortLimit)="onSortByMoreLimit()"></app-filter>
+                </div>
+            </div>
+    
+            <!-- Affichage d'expédition -->
+            <div *ngIf="(currentShipments.length > 0)">
+                <app-shipment 
+                    *ngFor="let shipment of currentShipments" 
+                    [shipment]="shipment"
+                ></app-shipment>
+            </div>
+
+            <div 
+                *ngIf="!(currentShipments.length > 0)"
+                class="max-w-screen-sm mx-auto p-4">
+                <p class="text-lg text-gray-600 flex flex-col items-center">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <span>Aucune expédition prévue pour ce trajet ou cette date ou ce filtre</span>
+                </p>
+            </div>
+        </article>
+    </div>
+</main>
